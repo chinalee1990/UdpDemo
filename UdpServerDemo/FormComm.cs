@@ -88,7 +88,7 @@ namespace UdpServerDemo
         private void OnUpdateRecvTextBox(Object strText)
         {
             udpComm1.m_RecvCount++;
-            richTextBox_Recv.Text += strText.ToString() + "\r\n================";
+            richTextBox_Recv.Text = strText.ToString() + "\r\n================";
 
 
             //UpdateRecvCount();

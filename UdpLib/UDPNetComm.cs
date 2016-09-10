@@ -156,7 +156,9 @@ namespace sUdpLib
 
                 m_SyncContext.Post(m_callback, strRecv);
 
-                Console.WriteLine(strRecv);
+                //Console.WriteLine(strRecv);
+                Console.WriteLine("Recv Length = {0}",m_recvBuffer.Length);
+
                 //继续接收
                 client.BeginReceive(new AsyncCallback(ReceiveCallback), client);
 

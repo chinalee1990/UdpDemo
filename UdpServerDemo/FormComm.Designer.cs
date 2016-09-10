@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.textBox_RemoteIP = new System.Windows.Forms.TextBox();
-            this.textBox_Send = new System.Windows.Forms.TextBox();
             this.button_Send = new System.Windows.Forms.Button();
             this.button_Set = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -47,8 +46,9 @@
             this.button_Clear = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.richTextBox_Recv = new System.Windows.Forms.RichTextBox();
             this.button_ClearSend = new System.Windows.Forms.Button();
+            this.richTextBox_Recv = new System.Windows.Forms.RichTextBox();
+            this.textBox_Send = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,15 +58,6 @@
             this.textBox_RemoteIP.Name = "textBox_RemoteIP";
             this.textBox_RemoteIP.Size = new System.Drawing.Size(94, 21);
             this.textBox_RemoteIP.TabIndex = 1;
-            // 
-            // textBox_Send
-            // 
-            this.textBox_Send.Location = new System.Drawing.Point(176, 35);
-            this.textBox_Send.Multiline = true;
-            this.textBox_Send.Name = "textBox_Send";
-            this.textBox_Send.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox_Send.Size = new System.Drawing.Size(355, 140);
-            this.textBox_Send.TabIndex = 1;
             // 
             // button_Send
             // 
@@ -201,6 +192,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.textBox_Send);
             this.groupBox1.Controls.Add(this.button_ClearSend);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.textBox_RemoteIP);
@@ -209,7 +201,6 @@
             this.groupBox1.Controls.Add(this.label_SendCount);
             this.groupBox1.Controls.Add(this.textBox_LocalPort);
             this.groupBox1.Controls.Add(this.label_RecvCount);
-            this.groupBox1.Controls.Add(this.textBox_Send);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.button_Set);
             this.groupBox1.Controls.Add(this.label2);
@@ -223,6 +214,16 @@
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             // 
+            // button_ClearSend
+            // 
+            this.button_ClearSend.Location = new System.Drawing.Point(176, 211);
+            this.button_ClearSend.Name = "button_ClearSend";
+            this.button_ClearSend.Size = new System.Drawing.Size(140, 23);
+            this.button_ClearSend.TabIndex = 4;
+            this.button_ClearSend.Text = "清空发送缓冲区";
+            this.button_ClearSend.UseVisualStyleBackColor = true;
+            this.button_ClearSend.Click += new System.EventHandler(this.button_ClearSend_Click);
+            // 
             // richTextBox_Recv
             // 
             this.richTextBox_Recv.Location = new System.Drawing.Point(13, 3);
@@ -233,15 +234,14 @@
             this.richTextBox_Recv.TabIndex = 7;
             this.richTextBox_Recv.Text = "";
             // 
-            // button_ClearSend
+            // textBox_Send
             // 
-            this.button_ClearSend.Location = new System.Drawing.Point(176, 211);
-            this.button_ClearSend.Name = "button_ClearSend";
-            this.button_ClearSend.Size = new System.Drawing.Size(140, 23);
-            this.button_ClearSend.TabIndex = 4;
-            this.button_ClearSend.Text = "清空发送缓冲区";
-            this.button_ClearSend.UseVisualStyleBackColor = true;
-            this.button_ClearSend.Click += new System.EventHandler(this.button_ClearSend_Click);
+            this.textBox_Send.Location = new System.Drawing.Point(176, 21);
+            this.textBox_Send.Name = "textBox_Send";
+            this.textBox_Send.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
+            this.textBox_Send.Size = new System.Drawing.Size(355, 141);
+            this.textBox_Send.TabIndex = 5;
+            this.textBox_Send.Text = "";
             // 
             // FormComm
             // 
@@ -264,7 +264,6 @@
         #endregion
 
         private System.Windows.Forms.TextBox textBox_RemoteIP;
-        private System.Windows.Forms.TextBox textBox_Send;
         private System.Windows.Forms.Button button_Send;
         private System.Windows.Forms.Button button_Set;
         private System.Windows.Forms.Label label1;
@@ -283,6 +282,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RichTextBox richTextBox_Recv;
         private System.Windows.Forms.Button button_ClearSend;
+        private System.Windows.Forms.RichTextBox textBox_Send;
     }
 }
 
