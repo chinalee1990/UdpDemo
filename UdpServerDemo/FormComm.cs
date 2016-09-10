@@ -60,7 +60,7 @@ namespace UdpServerDemo
             }
 
             udpComm1.SetRemotePoint(strRemoteIp, nRemotePort);
-            udpComm1.BeginReceiveData(OnUpdateRecvTextBox);
+            udpComm1.BeginReceiveData(OnUpdateRecvTextBox, false);
             button_Set.Enabled = false;
         }
 

@@ -24,8 +24,8 @@ namespace sUdpLib
         public int m_Sendcounter = 0;
         public int m_RecvCount = 0;
 
-        byte[] m_recvBuffer = new byte[10 * 1024];
-
+        byte[] m_recvBuffer = new byte[63 * 1024];
+        public bool m_bRecvHex = false;
         public String GetHostName()
         {
             return Dns.GetHostName();
@@ -73,6 +73,9 @@ namespace sUdpLib
         //发送数据
         public bool SendData(byte[] sendbuffer,int nLen)
         {
+            if (nLen == 0)
+                return false;
+
              try
             {
                 //发送数据
@@ -130,10 +133,10 @@ namespace sUdpLib
         /*********************************接收数据***********************************/
 
         //接收数据
-        public void BeginReceiveData(SendOrPostCallback callback)
+        public void BeginReceiveData(SendOrPostCallback callback,bool bRecvHex)
         {
             m_callback = callback;
-
+            m_bRecvHex = bRecvHex;
             m_UdpClient.BeginReceive(new AsyncCallback(ReceiveCallback), m_UdpClient);             //开始接收
             m_SyncContext = SynchronizationContext.Current;
         }
@@ -148,16 +151,28 @@ namespace sUdpLib
                 //读取接收的数据
                 IPEndPoint RemotePoint = new IPEndPoint(IPAddress.Parse(m_strRemoteIP), m_nRemotePort);
                 m_recvBuffer = client.EndReceive(iar, ref RemotePoint);
-                String strRecv = Encoding.UTF8.GetString(m_recvBuffer);
+                Console.WriteLine("Recv Length = {0}", m_recvBuffer.Length);
+
+                if(m_bRecvHex==false)
+                {
+                    String strRecv = Encoding.UTF8.GetString(m_recvBuffer);
+                    m_SyncContext.Post(m_callback, strRecv);
+
+                }
+                else
+                {
+                    byte[] nRecv = new byte[63*1024];
+                    Array.Copy(m_recvBuffer, nRecv, m_recvBuffer.Length);
+
+                    m_SyncContext.Post(m_callback, nRecv);
+                }
                 Array.Clear(m_recvBuffer, 0, m_recvBuffer.Length);
 
                 ////显示接收数据
                 //textBox_Recv.Invoke(m_DeleUpdateRecvTextBox, strRecv);
 
-                m_SyncContext.Post(m_callback, strRecv);
 
                 //Console.WriteLine(strRecv);
-                Console.WriteLine("Recv Length = {0}",m_recvBuffer.Length);
 
                 //继续接收
                 client.BeginReceive(new AsyncCallback(ReceiveCallback), client);
